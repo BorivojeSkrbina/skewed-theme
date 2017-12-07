@@ -89,27 +89,59 @@ $(document).ready(function () {
     }
 
 
+    var a = 0;
+$(window).scroll(function() {
 
-    $(window).scroll(function () {
-        var wh = $(window).height();
-        var scroll = $(window).scrollTop();
-        var position = $('.achievements').offset().top;
-        $('.counter-number').each(function () {
-            
+  var oTop = $('.achievements').offset().top - window.innerHeight;
+  if (a == 0 && $(window).scrollTop() > oTop + 500) {
+    $('.counter-number').each(function() {
+      var $this = $(this),
+        countTo = $this.attr('data-count');
+      $({
+        countNum: $this.text()
+      }).animate({
+          countNum: countTo
+        },
 
-            if (position < wh + scroll - 100) {
-                $(this).prop('Counter', 0).animate({
-                    Counter: $(this).text()
-                }, {
-                    duration: 4000,
-                    easing: 'swing',
-                    step: function (now) {
-                        $(this).text(Math.ceil(now));
-                    }
-                });
-            }
+        {
+
+          duration: 2000,
+          easing: 'swing',
+          step: function() {
+            $this.text(Math.floor(this.countNum));
+          },
+          complete: function() {
+            $this.text(this.countNum);
+            //alert('finished');
+          }
+
         });
     });
+    a = 1;
+  }
+
+});
+
+
+
+//    $(window).scroll(function () {
+//        var wh = $(window).height();
+//        var scroll = $(window).scrollTop();
+//        console.log(scroll);
+//        var position = $('.achievements').offset().top;
+//        $('.counter-number').each(function () {
+//
+//
+//            if (position < wh + scroll - 100) {
+//                $('.counter-number').counterUp({
+//                    delay: 10,
+//                    time: 1000
+//                });
+//            }
+//        });
+//    });
+
+    //COUNTER
 
 
 
