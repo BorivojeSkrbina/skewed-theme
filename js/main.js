@@ -12,7 +12,15 @@ $(document).ready(function(){
     $('.navbar-nav a').click(function(){
         $('html, body').animate({
         scrollTop: $($.attr(this, 'href')).offset().top
-    }, 5000);
+    }, 1000);
     });
+    
+    if($('.bx-slider').length > 0){
+        $('.lead-slider').bxSlider();
+    }
+    
+    
+    
+    
     
 });
